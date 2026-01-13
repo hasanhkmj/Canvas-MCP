@@ -1,0 +1,75 @@
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/hasan/Projects/canvas-mcp/CanvasMCP-Py/test_client.py", line 35, in main
+  |     async with sse_client(SERVER_URL) as streams:
+  |   File "/Users/hasan/.local/share/uv/python/cpython-3.11.12-macos-aarch64-none/lib/python3.11/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(typ, value, traceback)
+  |   File "/Users/hasan/Projects/canvas-mcp/CanvasMCP-Py/.venv/lib/python3.11/site-packages/mcp/client/sse.py", line 63, in sse_client
+  |     async with anyio.create_task_group() as tg:
+  |   File "/Users/hasan/Projects/canvas-mcp/CanvasMCP-Py/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 783, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |   File "/Users/hasan/Projects/canvas-mcp/CanvasMCP-Py/.venv/lib/python3.11/site-packages/mcp/client/sse.py", line 159, in sse_client
+    |     yield read_stream, write_stream
+    |   File "/Users/hasan/Projects/canvas-mcp/CanvasMCP-Py/test_client.py", line 36, in main
+    |     async with ClientSession(streams[0], streams[1]) as session:
+    |   File "/Users/hasan/Projects/canvas-mcp/CanvasMCP-Py/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 783, in __aexit__
+    |     raise BaseExceptionGroup(
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |   File "/Users/hasan/Projects/canvas-mcp/CanvasMCP-Py/test_client.py", line 71, in main
+      |     file_id = str(files_data[0]['id'])
+      |                   ~~~~~~~~~~^^^
+      | KeyError: 0
+      +------------------------------------
+Connecting to http://localhost:2222/sse...
+Initializing session...
+
+--- Listing Tools ---
+Found 18 tools
+
+--- Testing list_courses ({'per_page': 5}) ---
+Raw response (first 200 chars): [
+  {
+    "id": 47476,
+    "name": "Anime - Visual Interplay between Japan and the World",
+    "course_code": "82279-S",
+    "account_id": 19,
+    "created_at": "2025-05-05T01:57:39Z",
+    "start_at":...
+Response is valid JSON.
+Courses found: 25
+
+--- Testing get_course ({'course_id': '47476'}) ---
+Raw response (first 200 chars): {
+  "id": 47476,
+  "name": "Anime - Visual Interplay between Japan and the World",
+  "course_code": "82279-S",
+  "account_id": 19,
+  "created_at": "2025-05-05T01:57:39Z",
+  "start_at": null,
+  "defaul...
+Response is valid JSON.
+
+--- Testing list_assignments ({'course_id': '47476', 'per_page': 5}) ---
+Raw response (first 200 chars): [
+  {
+    "id": 839775,
+    "position": 1,
+    "description": "<p>Please form a group of <span style=\"text-decoration: underline;\">3-4</span> and submit three choices as possible topics for your Rea...
+Response is valid JSON.
+Assignments found: 25
+
+--- Testing get_assignment ({'course_id': '47476', 'assignment_id': '839775'}) ---
+Raw response (first 200 chars): {
+  "id": 839775,
+  "position": 1,
+  "description": "<p>Please form a group of <span style=\"text-decoration: underline;\">3-4</span> and submit three choices as possible topics for your Reading Prese...
+Response is valid JSON.
+
+--- Testing list_files ({'course_id': '47476', 'per_page': 5}) ---
+Raw response (first 200 chars): {"error": "Client error '403 Forbidden' for url 'https://canvas.cmu.edu/api/v1/courses/47476/files?per_page=5'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403...
+Response is valid JSON.
+Files found: 1

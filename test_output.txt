@@ -1,0 +1,115 @@
+Connecting to http://localhost:2222/sse...
+Initializing session...
+
+--- Listing Tools ---
+Found 18 tools
+
+--- Testing list_courses ({'per_page': 5}) ---
+Raw response (first 200 chars): [
+  {
+    "id": 47476,
+    "name": "Anime - Visual Interplay between Japan and the World",
+    "course_code": "82279-S",
+    "account_id": 19,
+    "created_at": "2025-05-05T01:57:39Z",
+    "start_at":...
+Response is valid JSON.
+Courses found: 25
+
+--- Testing get_course ({'course_id': '47476'}) ---
+Raw response (first 200 chars): {
+  "id": 47476,
+  "name": "Anime - Visual Interplay between Japan and the World",
+  "course_code": "82279-S",
+  "account_id": 19,
+  "created_at": "2025-05-05T01:57:39Z",
+  "start_at": null,
+  "defaul...
+Response is valid JSON.
+
+--- Testing list_assignments ({'course_id': '47476', 'per_page': 5}) ---
+Raw response (first 200 chars): [
+  {
+    "id": 839775,
+    "position": 1,
+    "description": "<p>Please form a group of <span style=\"text-decoration: underline;\">3-4</span> and submit three choices as possible topics for your Rea...
+Response is valid JSON.
+Assignments found: 25
+
+--- Testing get_assignment ({'course_id': '47476', 'assignment_id': '839775'}) ---
+Raw response (first 200 chars): {
+  "id": 839775,
+  "position": 1,
+  "description": "<p>Please form a group of <span style=\"text-decoration: underline;\">3-4</span> and submit three choices as possible topics for your Reading Prese...
+Response is valid JSON.
+
+--- Testing list_files ({'course_id': '47476', 'per_page': 5}) ---
+Raw response (first 200 chars): Error: Client error '403 Forbidden' for url 'https://canvas.cmu.edu/api/v1/courses/47476/files?per_page=5'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403...
+Tool returned error: Error: Client error '403 Forbidden' for url 'https://canvas.cmu.edu/api/v1/courses/47476/files?per_page=5'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+
+--- Testing list_modules ({'course_id': '47476', 'per_page': 2}) ---
+Raw response (first 200 chars): [
+  {
+    "id": 317596,
+    "position": 1,
+    "name": "Syllabus",
+    "unlock_at": null,
+    "require_sequential_progress": false,
+    "requirement_type": "all",
+    "publish_final_grade": false,
+   ...
+Response is valid JSON.
+
+--- Testing list_pages ({'course_id': '47476', 'per_page': 2}) ---
+Raw response (first 200 chars): Error: Client error '404 Not Found' for url 'https://canvas.cmu.edu/api/v1/courses/47476/pages?per_page=2'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404...
+Tool returned error: Error: Client error '404 Not Found' for url 'https://canvas.cmu.edu/api/v1/courses/47476/pages?per_page=2'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+
+--- Testing list_folders ({'course_id': '47476', 'per_page': 2}) ---
+Raw response (first 200 chars): [
+  {
+    "id": 1460940,
+    "name": "Intro to OnTopic",
+    "full_name": "course files/Intro to OnTopic",
+    "position": 15,
+    "parent_folder_id": 1460937,
+    "context_type": "Course",
+    "conte...
+Response is valid JSON.
+
+--- Testing get_folder ({'folder_id': '1460940'}) ---
+Raw response (first 200 chars): Error: Client error '403 Forbidden' for url 'https://canvas.cmu.edu/api/v1/folders/1460940'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403...
+Tool returned error: Error: Client error '403 Forbidden' for url 'https://canvas.cmu.edu/api/v1/folders/1460940'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+
+--- Testing list_quizzes ({'course_id': '47476', 'per_page': 2}) ---
+Raw response (first 200 chars): Error: Client error '404 Not Found' for url 'https://canvas.cmu.edu/api/v1/courses/47476/quizzes?per_page=2'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404...
+Tool returned error: Error: Client error '404 Not Found' for url 'https://canvas.cmu.edu/api/v1/courses/47476/quizzes?per_page=2'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+
+--- Testing list_discussion_topics ({'course_id': '47476', 'per_page': 2}) ---
+Raw response (first 200 chars): []...
+Response is valid JSON.
+
+--- Testing list_announcements ({'course_id': '47476', 'per_page': 2}) ---
+Raw response (first 200 chars): []...
+Response is valid JSON.
+
+--- Testing list_todo ({'per_page': 2}) ---
+Raw response (first 200 chars): [
+  {
+    "context_type": "Course",
+    "course_id": 50943,
+    "context_name": "Seminar for Peer Mentors",
+    "type": "submitting",
+    "ignore": "https://canvas.cmu.edu/api/v1/users/self/todo/assig...
+Response is valid JSON.
+
+--- Testing list_calendar_events ({'per_page': 2}) ---
+Raw response (first 200 chars): []...
+Response is valid JSON.
