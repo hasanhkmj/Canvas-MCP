@@ -16,7 +16,11 @@ def register_tools(mcp: FastMCP):
         max_pages: int = 5,
         max_items: Optional[int] = None
     ) -> str:
-        """List files for a course, folder, or the current user."""
+        """List files for a course, folder, or the current user.
+        
+        NOTE: If you receive a 403 Forbidden error, the instructor has likely hidden the "Files" tab.
+        In that case, try using `list_modules` with `include=['items']` to find course materials.
+        """
         if folder_id:
             path = f"/api/v1/folders/{folder_id}/files"
         elif course_id:
@@ -133,7 +137,11 @@ def register_tools(mcp: FastMCP):
         max_pages: int = 5,
         max_items: Optional[int] = None
     ) -> str:
-        """List modules for a course."""
+        """List modules for a course.
+        
+        TIP: Use `include=['items']` to see all module items, including files.
+        This is often the most reliable way to access course materials if `list_files` is restricted.
+        """
         try:
             data = await client.request(
                 f"/api/v1/courses/{course_id}/modules",

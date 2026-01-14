@@ -88,7 +88,7 @@ class CanvasClient:
         # Canvas file URLs might require auth, or might be public S3/CDN links.
         # We'll try with auth first.
         try:
-             async with httpx.AsyncClient() as client:
+             async with httpx.AsyncClient(follow_redirects=True) as client:
                 response = await client.get(url, headers=self.headers)
                 if response.status_code == 403 or response.status_code == 401:
                      # Try without auth headers (e.g. signed S3 url)

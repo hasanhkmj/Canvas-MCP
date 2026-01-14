@@ -3,6 +3,7 @@ import json
 import traceback
 from mcp.client.sse import sse_client
 from mcp.client.session import ClientSession
+from src.config import Config
 
 SERVER_URL = "http://localhost:2222/sse"
 
@@ -30,9 +31,10 @@ async def safe_call_tool(session, tool_name, arguments):
         return None
 
 async def main():
-    print(f"Connecting to {SERVER_URL}...")
+    token = Config.MCP_SERVER_TOKEN
+    print(f"Connecting to {SERVER_URL} with token={token[:5]}... (length {len(token)})")
     try:
-        async with sse_client(SERVER_URL) as streams:
+        async with sse_client(SERVER_URL, headers={"Authorization": f"Bearer {token}"}) as streams:
             async with ClientSession(streams[0], streams[1]) as session:
                 print("Initializing session...")
                 await session.initialize()
@@ -66,7 +68,7 @@ async def main():
                 # 5. List Files
                 files_data = await safe_call_tool(session, "list_files", {"course_id": course_id, "per_page": 5})
                 
-                if files_data:
+                if files_data and isinstance(files_data, list):
                     print(f"Files found: {len(files_data)}")
                     file_id = str(files_data[0]['id'])
                     # 6. Get File
@@ -79,11 +81,27 @@ async def main():
                          await safe_call_tool(session, "read_pdf", {"file_id": pdf_id, "max_chars": 100})
 
                 # 7. List Modules
-                await safe_call_tool(session, "list_modules", {"course_id": course_id, "per_page": 2})
+                modules_data = await safe_call_tool(session, "list_modules", {"course_id": course_id, "include": ["items"], "per_page": 2})
+                
+                # Try to find a file in the modules
+                if modules_data:
+                    for module in modules_data:
+                        for item in module.get("items", []):
+                            if item.get("type") == "File":
+                                file_id = str(item.get("content_id")) # content_id is usually the file ID for type File
+                                print(f"Found file in module: {item.get('title')} (ID: {file_id})")
+                                await safe_call_tool(session, "get_file", {"file_id": file_id})
+                                # Test reading PDF
+                                await safe_call_tool(session, "read_pdf", {"file_id": file_id, "max_chars": 100})
+                                # Break after trying one file
+                                break
+                        else:
+                            continue
+                        break
 
                 # 8. List Pages
                 pages_data = await safe_call_tool(session, "list_pages", {"course_id": course_id, "per_page": 2})
-                if pages_data:
+                if pages_data and isinstance(pages_data, list):
                     page_url = pages_data[0]['url']
                     await safe_call_tool(session, "get_page", {"course_id": course_id, "page_url": page_url})
 

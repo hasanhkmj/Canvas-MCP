@@ -15,3 +15,6 @@ class Config:
         # Ensure base URL doesn't have trailing slash
         if cls.CANVAS_BASE_URL.endswith("/"):
             cls.CANVAS_BASE_URL = cls.CANVAS_BASE_URL.rstrip("/")
+
+    # MCP Server Token for Authentication
+    MCP_SERVER_TOKEN = os.getenv("MCP_SERVER_TOKEN", "test-token")
