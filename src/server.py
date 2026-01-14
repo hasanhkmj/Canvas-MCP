@@ -26,7 +26,7 @@ def create_server():
 mcp = create_server()
 
 def main():
-    mcp.run(transport="sse", port=2222, path="/mcp", host="0.0.0.0")
+    mcp.run(transport="http", host="0.0.0.0", port=2222, stateless_http=True)
 
 if __name__ == "__main__":
     main()
